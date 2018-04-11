@@ -9,6 +9,8 @@ download_project(
     GIT_TAG master
 )
 
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
 ADD_SUBDIRECTORY(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
 
 FILE(GLOB _SOURCES src/*.cpp)
