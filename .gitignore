@@ -1,3 +1,13 @@
+# Project
+ASCIIAnimator
+
+# Google Test
+gmock.pc
+gmock_main.pc
+googletest/
+gtest.pc
+gtest_main.pc
+
 # Prerequisites
 *.d
 
@@ -30,3 +40,14 @@
 *.exe
 *.out
 *.app
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
