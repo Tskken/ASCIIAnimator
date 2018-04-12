@@ -1,5 +1,8 @@
 #include "gtest/gtest.h"
+#include "animator.h"
 #include "baseline.h"
+#include "frame.h"
+#include "framefetcher.h"
 
 TEST(baseline, one) {
     int expected = 1;
