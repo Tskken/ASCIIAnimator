@@ -10,11 +10,12 @@ download_project(
     PREFIX googletest
 )
 
-SET(googletest_force_shared_crt ON CACHE BOOL "" FORCE)
+SET(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 ADD_SUBDIRECTORY(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
 
 FILE(GLOB _SOURCES src/*.cpp)
+FILE(GLOB _TESTS test/*.cpp)
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${_SOURCES})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} googletest gmock)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} gtest)
