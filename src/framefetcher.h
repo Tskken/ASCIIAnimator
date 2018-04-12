@@ -1,3 +1,6 @@
+#ifndef FRAMEFETCHER_H
+#define FRAMEFETCHER_H
+
 #include <string>
 #include <vector>
 #include "frame.h"
@@ -15,3 +18,5 @@ class FrameFetcher
         int get_count();
         Frame get_frame(int index);
 };
+
+#endif

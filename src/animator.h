@@ -1,3 +1,6 @@
+#ifndef ANIMATOR_H
+#define ANIMATOR_H
+
 #include <string>
 #include "framefetcher.h"
 
@@ -16,3 +19,5 @@ class Animator
         void backward(int step);
         void reset();
 };
+
+#endif

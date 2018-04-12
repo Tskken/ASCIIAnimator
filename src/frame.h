@@ -1,3 +1,6 @@
+#ifndef FRAME_H
+#define FRAME_H
+
 #include <ostream>
 #include <string>
 
@@ -12,3 +15,5 @@ class Frame
         void display(std::ostream out);
         void set_color(std::string color_code);
 };
+
+#endif
