@@ -3,7 +3,7 @@
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 # * Redistributions of source code must retain the above copyright notice, this
 #   list of conditions and the following disclaimer.
 #
@@ -26,18 +26,24 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-add_library(baseline "")
+add_library(asciianimator "")
 
 target_sources(
-    baseline
+    asciianimator
     PRIVATE
+        animator.cpp
         baseline.cpp
+        frame.cpp
+        framefetcher.cpp
     PUBLIC
+        ${CMAKE_CURRENT_LIST_DIR}/animator.h
         ${CMAKE_CURRENT_LIST_DIR}/baseline.h
+        ${CMAKE_CURRENT_LIST_DIR}/frame.h
+        ${CMAKE_CURRENT_LIST_DIR}/framefetcher.h
     )
 
 target_include_directories(
-    baseline
+    asciianimator
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
 )
