@@ -17,6 +17,8 @@ class Animator
     public:
         Animator();
         ~Animator();
+        void enable_colors();
+        void disable_colors();
         void load(std::string animation_path);
         void play(int fps);
         void forward(int step);

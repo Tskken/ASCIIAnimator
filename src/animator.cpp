@@ -4,6 +4,10 @@ Animator::Animator() {}
 
 Animator::~Animator() {}
 
+void Animator::enable_colors() {}
+
+void Animator::disable_colors() {}
+
 void Animator::load(std::string animation_path) {}
 
 void Animator::play(int fps) {}
