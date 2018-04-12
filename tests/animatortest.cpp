@@ -4,17 +4,16 @@
 #include "gtest/gtest.h"
 #include "animator.h"
 
-TEST(animator, basic)
+TEST(AnimatorTest, basic)
 {
     EXPECT_EQ(1, 1);
 }
 
-TEST(animator, step_forward_once)
+TEST(AnimatorTest, StepForwardOnce)
 {
     // Load the animation
     Animator animator;
-    std::string animation_path = "../samples/animation_1";
-    animator.load(animation_path);
+    animator.load("../samples/animation_1");
 
     // Capture the result of stepping forward once
     std::stringstream ss;
@@ -23,13 +22,44 @@ TEST(animator, step_forward_once)
 
     // Open the frame buffer
     std::ifstream fin;
-    std::ifstream::open("../samples/animation_1/00.txt", fin);
+    fin.open("../samples/animation_1/00.txt", std::ifstream::in);
 
     // Make line-by-line comparisons between captured output and frame buffer
     std::string expected_line;
     std::string actual_line;
-    while (getline(fin, expected_line)) {
+    while (getline(fin, expected_line))
+    {
         getline(ss, actual_line);
-        EXPECT_EQ(expected_line, actual_line);
+        ASSERT_STREQ(expected_line.c_str(), actual_line.c_str());
+    }
+}
+
+TEST(AnimatorTest, StepForwardAndThrough)
+{
+    Animator animator;
+    animator.load("../samples/animation_1");
+
+    std::stringstream ss;
+    animator.set_stream(ss);
+
+    std::ifstream fin;
+    for (int i = 0; i < 24; i++)
+    {
+        animator.forward(1);
+
+        std::string index = std::to_string(i);
+        if (i < 10)
+        {
+            index = "0" + index;
+        }
+        fin.open("../samples/animation_1/" + index + ".txt", std::ifstream::in);
+
+        std::string expected_line;
+        std::string actual_line;
+        while (getline(fin, expected_line))
+        {
+            getline(ss, actual_line);
+            ASSERT_STREQ(expected_line.c_str(), actual_line.c_str());
+        }
     }
 }

@@ -8,12 +8,10 @@ class Frame
 {
     private:
         std::string data;
-        std::string color;
     public:
-        Frame(std::string path_to_frame);
+        Frame(std::string frame_path);
         ~Frame();
-        void display(std::ostream out);
-        void set_color(std::string color_code);
+        std::string get_data();
 };
 
 #endif

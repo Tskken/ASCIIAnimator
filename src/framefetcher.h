@@ -17,7 +17,7 @@ class FrameFetcher
         ~FrameFetcher();
         int get_count();
         Frame get_frame(int index);
-        void load(std::string frames_dir_path);
+        void load(std::string animation_path);
 };
 
 #endif
