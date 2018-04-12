@@ -13,10 +13,11 @@ class FrameFetcher
         int buffer_limit;
 
     public:
-        FrameFetcher(std::string frames_dir_path);
+        FrameFetcher();
         ~FrameFetcher();
         int get_count();
         Frame get_frame(int index);
+        void load(std::string frames_dir_path);
 };
 
 #endif

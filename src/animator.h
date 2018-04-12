@@ -1,23 +1,28 @@
 #ifndef ANIMATOR_H
 #define ANIMATOR_H
 
+#include <iostream>
+#include <ostream>
 #include <string>
+#include <streambuf>
 #include "framefetcher.h"
 
 class Animator
 {
     private:
-        FrameFetcher fetcher;
-        int current_frame = 0;
+        std::ostream *m_out = &std::cout;
+        FrameFetcher m_fetcher;
+        int m_current_frame = 0;
 
     public:
         Animator();
         ~Animator();
-        int load(std::string frames_dir_path);
+        void load(std::string animation_path);
         void play(int fps);
         void forward(int step);
         void backward(int step);
         void reset();
+        void set_stream(std::iostream &stream);
 };
 
 #endif
