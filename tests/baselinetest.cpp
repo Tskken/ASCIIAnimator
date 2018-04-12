@@ -4,7 +4,7 @@
 #include "frame.h"
 #include "framefetcher.h"
 
-TEST(baseline, one) {
+TEST(baseline, basic) {
     int expected = 1;
     int actual = baseline_function(1);
     ASSERT_EQ(expected, actual);

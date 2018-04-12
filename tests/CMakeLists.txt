@@ -28,7 +28,10 @@
 
 add_executable(
     unit_tests
+    animatortest.cpp
     baselinetest.cpp
+    frametest.cpp
+    framefetchertest.cpp
     )
 
 target_link_libraries(
