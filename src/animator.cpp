@@ -52,24 +52,20 @@ void Animator::load_animation(std::string animation_path)
 
 void Animator::play(int fps, int loops)
 {
-    int delay = (1.0 / fps) * 1000;
     int count = m_fetcher.get_count();
     for (int i = 0; i < count * loops; i++)
     {
         forward(1);
-        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
     }
 }
 
 void Animator::reverse(int fps, int loops)
 {
-    int delay = (1.0 / fps) * 1000;
     int count = m_fetcher.get_count();
     m_current_frame = count;
     for (int i = 0; i < count * loops; i++)
     {
         backward(1);
-        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
     }
 }
 
