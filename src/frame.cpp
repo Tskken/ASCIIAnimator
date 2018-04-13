@@ -6,5 +6,5 @@ Frame::~Frame() {}
 
 std::string Frame::get_data()
 {
-    return "";
+    return data;
 }

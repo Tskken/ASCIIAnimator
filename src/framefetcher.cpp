@@ -11,8 +11,7 @@ int FrameFetcher::get_count()
 
 Frame FrameFetcher::get_frame(int index)
 {
-    Frame frame("");
-    return frame;
+    return frame_buffer.at(index);
 }
 
 void FrameFetcher::load(std::string animation_path) {}

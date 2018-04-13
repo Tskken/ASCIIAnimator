@@ -1,4 +1,5 @@
 #include "animator.h"
+#include <unistd.h>
 
 Animator::Animator() {}
 
@@ -10,11 +11,26 @@ void Animator::disable_colors() {}
 
 void Animator::load(std::string animation_path) {}
 
-void Animator::play(int fps) {}
+void Animator::play(int fps) {
+    int counter = 0;
+    while (true) {
+        if counter == 1000 {
+            return;
+        }
+        *m_out << m_fetcher.get_frame(m_current_frame).get_data();
+        forward(1);
+        counter++;
+        usleep(fps * 1000);
+    }
+}
 
-void Animator::forward(int step) {}
+void Animator::forward(int step) {
+    m_current_frame += step;
+}
 
-void Animator::backward(int step) {}
+void Animator::backward(int step) {
+    m_current_frame -= step;
+}
 
 void Animator::reset() {}
 
