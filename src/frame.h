@@ -1,15 +1,18 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-#include <ostream>
+#include <fstream>
+#include <sstream>
 #include <string>
 
 class Frame
 {
     private:
-        std::string data;
+        std::string m_data;
+        std::string m_path;
+        int m_index;
     public:
-        Frame(std::string frame_path);
+        Frame(std::string path, int index);
         ~Frame();
         std::string get_data();
 };

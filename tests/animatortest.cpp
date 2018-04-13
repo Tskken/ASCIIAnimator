@@ -41,6 +41,33 @@ TEST(AnimatorTest, StepForwardOnce)
     fin.close();
 }
 
+TEST(AnimatorTest, StepForwardBig)
+{
+    // Load the animation and capture output
+    Animator animator;
+    animator.load("../samples/animation_1");
+    std::stringstream ss;
+    animator.set_stream(ss);
+
+    // Open the frame buffer
+    std::ifstream fin;
+    fin.open("../samples/animation_1/01.txt", std::ifstream::in);
+
+    // Step forward two frames
+    animator.forward(2);
+    
+    // Make line-by-line comparisons of frames
+    std::string expected_line;
+    std::string actual_line;
+    while (getline(fin, expected_line))
+    {
+        getline(ss, actual_line);
+        ASSERT_STREQ(expected_line.c_str(), actual_line.c_str());
+    }
+    // Close the frame buffer
+    fin.close();
+}
+
 TEST(AnimatorTest, StepForwardAndThrough)
 {
     // Load the animation and capture output
