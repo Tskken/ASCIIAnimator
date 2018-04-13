@@ -6,14 +6,22 @@ FrameFetcher::FrameFetcher()
     worker.join();
 }
 
-FrameFetcher::~FrameFetcher() {}
+FrameFetcher::~FrameFetcher()
+{
+    for (Frame *frame : m_frames)
+    {
+        delete frame;
+        frame = NULL;
+    }
+}
 
 void FrameFetcher::load_frames()
 {
     for (int i = 0; i < m_frame_paths.size(); i++)
     {
         std::string path = m_frame_paths[i];
-        m_frames.push_back(Frame(path, i));
+        Frame *frame = new Frame(path, i);
+        m_frames.push_back(frame);
     }
 }
 
@@ -22,7 +30,7 @@ int FrameFetcher::get_count()
     return m_frame_paths.size();
 }
 
-Frame FrameFetcher::get_frame(int index)
+Frame *FrameFetcher::get_frame(int index)
 {
     // Check for out-of-bounds access
     if (index > m_frame_paths.size())
@@ -30,11 +38,18 @@ Frame FrameFetcher::get_frame(int index)
         exit(1);
     }
     // Wait until frame is buffered
-    while (index >= m_frames.size());
+    while (true)
+    {
+        int size = m_frames.size();
+        if (index < size)
+        {
+            break;
+        }
+    }
     return m_frames[index];
 }
 
-void FrameFetcher::load(std::string animation_path)
+void FrameFetcher::load_animation (std::string animation_path)
 {
     struct dirent *ent = NULL;
     DIR *dir = opendir(animation_path.c_str());

@@ -15,31 +15,53 @@ void Animator::enable_colors() {}
 
 void Animator::disable_colors() {}
 
-void Animator::load(std::string animation_path) {}
-
-void Animator::play(int fps)
+void Animator::load_animation(std::string animation_path)
 {
-    int counter = 0;
-    while (true) {
-        if (counter == 1000) {
-            return;
-        }
-        *m_out << m_fetcher.get_frame(m_current_frame).get_data();
+    m_fetcher.load_animation(animation_path);
+}
+
+void Animator::play(int fps, int loops)
+{
+    int delay = (1.0 / fps) * 1000;
+    int count = m_fetcher.get_count();
+    for (int i = 0; i < count * loops; i++)
+    {
         forward(1);
-        counter++;
-        std::this_thread::sleep_for(std::chrono::seconds(1 / fps));
+        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
     }
 }
 
-void Animator::forward(int step) {
+void Animator::forward(int step)
+{
+    if (m_current_frame + step >= m_fetcher.get_count())
+    {
+        return;
+    }
     m_current_frame += step;
+    display_current_frame();
 }
 
-void Animator::backward(int step) {
+void Animator::backward(int step)
+{
+    if (m_current_frame - step < 0)
+    {
+        return;
+    }
     m_current_frame -= step;
+    display_current_frame();
 }
 
-void Animator::reset() {}
+void Animator::display_current_frame()
+{
+    Frame *frame = m_fetcher.get_frame(m_current_frame);
+    *m_out << frame->get_data();
+    frame = NULL;
+}
+
+void Animator::reset()
+{
+    m_current_frame = 0;
+}
 
 void Animator::set_stream(std::iostream &stream) {
     m_out = new std::ostream(stream.rdbuf());
