@@ -27,6 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+add_compile_options(-std=c++11)
 
 project(asciianimator CXX)
 
