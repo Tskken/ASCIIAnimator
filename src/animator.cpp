@@ -14,7 +14,7 @@ void Animator::load(std::string animation_path) {}
 void Animator::play(int fps) {
     int counter = 0;
     while (true) {
-        if counter == 1000 {
+        if (counter == 1000) {
             return;
         }
         *m_out << m_fetcher.get_frame(m_current_frame).get_data();

@@ -16,9 +16,5 @@ Frame::~Frame() {}
 
 std::string Frame::get_data()
 {
-<<<<<<< HEAD
-    return data;
-=======
     return m_data;
->>>>>>> 55cc079a6eaf1941ff97a2637d1742bd6bd08045
 }

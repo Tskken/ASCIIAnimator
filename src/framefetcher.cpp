@@ -24,9 +24,6 @@ int FrameFetcher::get_count()
 
 Frame FrameFetcher::get_frame(int index)
 {
-<<<<<<< HEAD
-    return frame_buffer.at(index);
-=======
     // Check for out-of-bounds access
     if (index > m_frame_paths.size())
     {
@@ -35,7 +32,6 @@ Frame FrameFetcher::get_frame(int index)
     // Wait until frame is buffered
     while (index >= m_frames.size());
     return m_frames[index];
->>>>>>> 55cc079a6eaf1941ff97a2637d1742bd6bd08045
 }
 
 void FrameFetcher::load(std::string animation_path)
