@@ -54,4 +54,7 @@ compile_commands.json
 CTestTestfile.cmake
 
 # MacOS
-.DS_Store
+*.DS_Store
+
+# IDE
+.vscode
