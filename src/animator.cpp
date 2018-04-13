@@ -61,17 +61,16 @@ void Animator::play(int fps, int loops)
     }
 }
 
-Frame *Animator::reverse(int fps, int loops)
+void Animator::reverse(int fps, int loops)
 {
     int delay = (1.0 / fps) * 1000;
     int count = m_fetcher.get_count();
-    m_current_frame = count - 1;
+    m_current_frame = count;
     for (int i = 0; i < count * loops; i++)
     {
         backward(1);
         std::this_thread::sleep_for(std::chrono::milliseconds(delay));
     }
-    return m_fetcher.get_frame(m_current_frame);
 }
 
 void Animator::forward(int step)

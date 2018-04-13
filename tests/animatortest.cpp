@@ -155,7 +155,7 @@ TEST(AnimatorTest, StepForwardAndThroughColors)
     }
 }
 
-TEST(AnimatonTest, Play)
+TEST(AnimationTest, Play)
 {
     // Load the animation and capture output
     Animator animator;
@@ -164,7 +164,7 @@ TEST(AnimatonTest, Play)
     animator.set_stream(ss);
 
     // Compile all frames into a single buffer
-    std::string expected_buf;
+    std::string expected_buf = "";
     for (int i = 0; i < 24; i++)
     {        
         // Use index to derive filepath to next frame
@@ -175,13 +175,13 @@ TEST(AnimatonTest, Play)
         }
         std::string file_path = "../samples/animation_1/" + index + ".txt";
 
-        // Open the file as a Frame
+        // Open the file as a Frame and append to buffer
         Frame frame(file_path, i);
         expected_buf += frame.get_data();
     }
 
     // Play the animation to get the actual buffer
-    animator.play(1, 1);
+    animator.play(0, 1);
     std::string actual_buf = ss.str();
 
     ASSERT_EQ(expected_buf, actual_buf);
@@ -195,13 +195,25 @@ TEST(AnimationTest, PlayReverse)
     std::stringstream ss;
     animator.set_stream(ss);
     
-    Frame *frame1 = animator.reverse(2, 1);
-    Frame frame2("../samples/animation_1/00.txt", 0);
-    std::string data = frame2.get_data();
-    std::string reverse_data = "";
-    for (int i = 0; i < data.length(); i++)
-    {
-        reverse_data += data[(data.length()-1) - i];
+    // Compile all frames into a single buffer
+    std::string expected_buf = "";
+    for (int i = 0; i < 24; i++)
+    {        
+        // Use index to derive filepath to next frame
+        std::string index = std::to_string(i);
+        if (i < 10)
+        {
+            index = "0" + index;
+        }
+        std::string file_path = "../samples/animation_1/" + index + ".txt";
+
+        // Open the file as a Frame and prepend to buffer
+        Frame frame(file_path, i);
+        expected_buf = frame.get_data() + expected_buf;
     }
-    ASSERT_EQ(reverse_data, frame1->get_data());
+
+    animator.reverse(0, 1);
+    std::string actual_buf = ss.str();
+
+    ASSERT_EQ(expected_buf, actual_buf);
 }
