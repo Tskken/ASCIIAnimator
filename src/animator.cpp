@@ -96,3 +96,7 @@ void Animator::reset()
 void Animator::set_stream(std::iostream &stream) {
     m_out = new std::ostream(stream.rdbuf());
 }
+
+Frame Animator::reverse(){
+    
+}

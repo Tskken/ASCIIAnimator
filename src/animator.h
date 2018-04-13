@@ -37,6 +37,7 @@ class Animator
         void play(int fps, int loops);
         void forward(int step);
         void backward(int step);
+        Frame reverse()
         void display_current_frame();
         void reset();
         void set_stream(std::iostream &stream);

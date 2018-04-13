@@ -163,3 +163,20 @@ TEST(AnimatorTest, StepForwardAndThroughColors)
         fin.close();
     }
 }
+
+TEST(AnimatinTest, PlayReverce){
+    Animator animator;
+    animator.load_animator("../samples/animation_1");
+    std::stringstream ss;
+    animator.set_stream(ss);
+    
+    Frame frame1 = animator.reverce();
+    Frame frame2("../samples/animation_1/00.txt", 0);
+    std::string data = frame2.get_data();
+    std::string reverce_data = "";
+    for int i = 0; i < data.length(); i++ {
+        reverce_data += data[(data.length()-1) - i];
+    }
+    ASSERT_EQ(reverce_data, frame1.get_data())
+    
+}
