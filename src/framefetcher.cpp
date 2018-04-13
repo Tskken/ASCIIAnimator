@@ -36,10 +36,9 @@ Frame *FrameFetcher::get_frame(int index)
     {
         exit(1);
     }
-    // Wait until frame is buffered
     while (index >= m_frames.size())
     {
-        
+        // Wait until frame is buffered
     }
     return m_frames[index];
 }
@@ -65,4 +64,8 @@ void FrameFetcher::load_animation (std::string animation_path)
     closedir(dir);
     dir = NULL;
     ent = NULL;
+
+
+    std::thread worker(&FrameFetcher::load_frames, this);
+    worker.join();
 }
