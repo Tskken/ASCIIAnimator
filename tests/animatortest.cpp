@@ -5,15 +5,6 @@
 #include "gtest/gtest.h"
 #include "animator.h"
 
-const std::string CL_RESET   = "\033[0m";
-const std::string BG_RED     = "\033[1;41m";
-const std::string BG_YELLOW  = "\033[1;43m";
-const std::string BG_GREEN   = "\033[1;42m";
-const std::string BG_CYAN    = "\033[1;46m";
-const std::string BG_BLUE    = "\033[1;44m";
-const std::string BG_MAGENTA = "\033[1;45m";
-const std::string FG_WHITE   = "\033[1;37m";
-
 TEST(AnimatorTest, StepForwardOnce)
 {
     // Load the animation and capture output
@@ -111,12 +102,12 @@ TEST(AnimatorTest, StepForwardAndThroughColors)
 {
     // Define color cycle
     std::queue<std::string> color_cycle;
-    color_cycle.push(BG_RED);
-    color_cycle.push(BG_YELLOW);
-    color_cycle.push(BG_GREEN);
-    color_cycle.push(BG_CYAN);
-    color_cycle.push(BG_BLUE);
-    color_cycle.push(BG_MAGENTA);
+    color_cycle.push(std::string(BG_RED));
+    color_cycle.push(std::string(BG_YELLOW));
+    color_cycle.push(std::string(BG_GREEN));
+    color_cycle.push(std::string(BG_GREEN));
+    color_cycle.push(std::string(BG_BLUE));
+    color_cycle.push(std::string(BG_MAGENTA));
 
     // Load the animation and capture output
     Animator animator;
@@ -164,19 +155,53 @@ TEST(AnimatorTest, StepForwardAndThroughColors)
     }
 }
 
-TEST(AnimatinTest, PlayReverce){
+TEST(AnimatonTest, Play)
+{
+    // Load the animation and capture output
     Animator animator;
-    animator.load_animator("../samples/animation_1");
+    animator.load_animation("../samples/animation_1");
+    std::stringstream ss;
+    animator.set_stream(ss);
+
+    // Compile all frames into a single buffer
+    std::string expected_buf;
+    for (int i = 0; i < 24; i++)
+    {        
+        // Use index to derive filepath to next frame
+        std::string index = std::to_string(i);
+        if (i < 10)
+        {
+            index = "0" + index;
+        }
+        std::string file_path = "../samples/animation_1/" + index + ".txt";
+
+        // Open the file as a Frame
+        Frame frame(file_path, i);
+        expected_buf += frame.get_data();
+    }
+
+    // Play the animation to get the actual buffer
+    animator.play(1, 1);
+    std::string actual_buf = ss.str();
+
+    ASSERT_EQ(expected_buf, actual_buf);
+}
+
+TEST(AnimationTest, PlayReverse)
+{
+    // Load the animation and capture output
+    Animator animator;
+    animator.load_animation("../samples/animation_1");
     std::stringstream ss;
     animator.set_stream(ss);
     
-    Frame frame1 = animator.reverce();
+    Frame *frame1 = animator.reverse(2, 1);
     Frame frame2("../samples/animation_1/00.txt", 0);
     std::string data = frame2.get_data();
-    std::string reverce_data = "";
-    for int i = 0; i < data.length(); i++ {
-        reverce_data += data[(data.length()-1) - i];
+    std::string reverse_data = "";
+    for (int i = 0; i < data.length(); i++)
+    {
+        reverse_data += data[(data.length()-1) - i];
     }
-    ASSERT_EQ(reverce_data, frame1.get_data())
-    
+    ASSERT_EQ(reverse_data, frame1->get_data());
 }

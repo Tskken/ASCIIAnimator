@@ -35,9 +35,9 @@ class Animator
         void disable_colors();
         void load_animation(std::string animation_path);
         void play(int fps, int loops);
+        Frame *reverse(int fps, int loops);
         void forward(int step);
         void backward(int step);
-        Frame reverse()
         void display_current_frame();
         void reset();
         void set_stream(std::iostream &stream);
