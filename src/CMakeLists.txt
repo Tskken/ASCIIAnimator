@@ -32,12 +32,10 @@ target_sources(
     asciianimator
     PRIVATE
         animator.cpp
-        baseline.cpp
         frame.cpp
         framefetcher.cpp
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/animator.h
-        ${CMAKE_CURRENT_LIST_DIR}/baseline.h
         ${CMAKE_CURRENT_LIST_DIR}/frame.h
         ${CMAKE_CURRENT_LIST_DIR}/framefetcher.h
     )

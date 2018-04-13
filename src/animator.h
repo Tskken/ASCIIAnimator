@@ -1,10 +1,12 @@
 #ifndef ANIMATOR_H
 #define ANIMATOR_H
 
+#include <chrono>
 #include <iostream>
 #include <ostream>
 #include <string>
 #include <streambuf>
+#include <thread>
 #include "framefetcher.h"
 
 class Animator

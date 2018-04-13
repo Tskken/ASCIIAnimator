@@ -44,4 +44,6 @@ void FrameFetcher::load(std::string animation_path)
         m_frame_paths.push_back(animation_path + '/' + name);
     }
     closedir(dir);
+    dir = NULL;
+    ent = NULL;
 }

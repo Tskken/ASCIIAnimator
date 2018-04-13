@@ -10,6 +10,7 @@ Frame::Frame(std::string path, int index)
     std::stringstream buf;
     buf << fin.rdbuf();
     m_data = buf.str();
+    fin.close();
 }
 
 Frame::~Frame() {}
