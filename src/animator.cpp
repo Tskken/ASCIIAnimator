@@ -12,30 +12,37 @@ Animator::~Animator()
 }
 
 void Animator::enable_colors() {
-    srand(time(NULL))
-    int randColor = rand() % 7
+    srand(time(NULL));
+    int randColor = rand() % 7;
     switch (randColor){
         case 0:
-            m_color = BG_RED
+            m_color = BG_RED;
+            break;
         case 1:
-            m_color = BG_YELLOW
+            m_color = BG_YELLOW;
+            break;
         case 2:
-            m_color = BG_GREEN
+            m_color = BG_GREEN;
+            break;
         case 3:
-            m_color = BG_CYAN
+            m_color = BG_CYAN;
+            break;
         case 4:
-            m_color = BG_BLUE
+            m_color = BG_BLUE;
+            break;
         case 5:
-            m_color = BG_MAGENTA
+            m_color = BG_MAGENTA;
+            break;
         case 6:
-            m_color = FG_WHITE
+            m_color = FG_WHITE;
+            break;
         default:
-            m_color = CL_RESET
+            m_color = CL_RESET;
     }
 }
 
 void Animator::disable_colors() {
-    m_color = CL_RESET
+    m_color = CL_RESET;
 }
 
 void Animator::load_animation(std::string animation_path)
