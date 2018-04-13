@@ -60,7 +60,7 @@ void Animator::display_current_frame()
 
 void Animator::reset()
 {
-    m_current_frame = 0;
+    m_current_frame = -1;
 }
 
 void Animator::set_stream(std::iostream &stream) {

@@ -2,8 +2,7 @@
 
 FrameFetcher::FrameFetcher()
 {
-    std::thread worker(&FrameFetcher::load_frames, this);
-    worker.join();
+
 }
 
 FrameFetcher::~FrameFetcher()
@@ -38,13 +37,9 @@ Frame *FrameFetcher::get_frame(int index)
         exit(1);
     }
     // Wait until frame is buffered
-    while (true)
+    while (index >= m_frames.size())
     {
-        int size = m_frames.size();
-        if (index < size)
-        {
-            break;
-        }
+        
     }
     return m_frames[index];
 }
@@ -55,10 +50,22 @@ void FrameFetcher::load_animation (std::string animation_path)
     DIR *dir = opendir(animation_path.c_str());
     while ((ent = readdir(dir)) != NULL)
     {
+        // Get dirent name
         std::string name = ent->d_name;
-        m_frame_paths.push_back(animation_path + '/' + name);
+
+        // Append an illegal character to dirent name
+        std::string name_test = name + '?';
+
+        // See if dirent name ends with .txt
+        if (name_test.find(".txt?") != std::string::npos)
+        {
+            m_frame_paths.push_back(animation_path + '/' + name);
+        }
     }
     closedir(dir);
     dir = NULL;
     ent = NULL;
+
+    std::thread worker(&FrameFetcher::load_frames, this);
+    worker.join();
 }

@@ -18,7 +18,7 @@ TEST(AnimatorTest, StepForwardOnce)
 {
     // Load the animation and capture output
     Animator animator;
-    animator.load("../samples/animation_1");
+    animator.load_animation("../samples/animation_1");
     std::stringstream ss;
     animator.set_stream(ss);
 
@@ -35,7 +35,7 @@ TEST(AnimatorTest, StepForwardOnce)
     while (getline(fin, expected_line))
     {
         getline(ss, actual_line);
-        ASSERT_STREQ(expected_line.c_str(), actual_line.c_str());
+        ASSERT_EQ(expected_line, actual_line);
     }
     // Close the frame buffer
     fin.close();
@@ -45,7 +45,7 @@ TEST(AnimatorTest, StepForwardBig)
 {
     // Load the animation and capture output
     Animator animator;
-    animator.load("../samples/animation_1");
+    animator.load_animation("../samples/animation_1");
     std::stringstream ss;
     animator.set_stream(ss);
 
@@ -62,7 +62,7 @@ TEST(AnimatorTest, StepForwardBig)
     while (getline(fin, expected_line))
     {
         getline(ss, actual_line);
-        ASSERT_STREQ(expected_line.c_str(), actual_line.c_str());
+        ASSERT_EQ(expected_line, actual_line);
     }
     // Close the frame buffer
     fin.close();
@@ -72,7 +72,7 @@ TEST(AnimatorTest, StepForwardAndThrough)
 {
     // Load the animation and capture output
     Animator animator;
-    animator.load("../samples/animation_1");
+    animator.load_animation("../samples/animation_1");
     std::stringstream ss;
     animator.set_stream(ss);
 
@@ -100,14 +100,14 @@ TEST(AnimatorTest, StepForwardAndThrough)
         while (getline(fin, expected_line))
         {
             getline(ss, actual_line);
-            ASSERT_STREQ(expected_line.c_str(), actual_line.c_str());
+            ASSERT_EQ(expected_line, actual_line);
         }
         // Close the frame buffer
         fin.close();
     }
 }
 
-TEST(AnimatorTest, StepForwadAndThroughColors)
+TEST(AnimatorTest, StepForwardAndThroughColors)
 {
     // Define color cycle
     std::queue<std::string> color_cycle;
@@ -120,7 +120,7 @@ TEST(AnimatorTest, StepForwadAndThroughColors)
 
     // Load the animation and capture output
     Animator animator;
-    animator.load("../samples/animation_1");
+    animator.load_animation("../samples/animation_1");
     std::stringstream ss;
     animator.set_stream(ss);
 
@@ -157,7 +157,7 @@ TEST(AnimatorTest, StepForwadAndThroughColors)
             expected_line = FG_WHITE + bg_color + expected_line + CL_RESET;
 
             getline(ss, actual_line);
-            ASSERT_STREQ(expected_line.c_str(), actual_line.c_str());
+            ASSERT_EQ(expected_line, actual_line);
         }
         // Close the frame buffer
         fin.close();

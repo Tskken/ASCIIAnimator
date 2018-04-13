@@ -14,7 +14,7 @@ class Animator
     private:
         std::ostream *m_out = &std::cout;
         FrameFetcher m_fetcher;
-        int m_current_frame = 0;
+        int m_current_frame = -1;
 
     public:
         Animator();
