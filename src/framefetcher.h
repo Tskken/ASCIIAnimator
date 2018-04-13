@@ -4,7 +4,6 @@
 #include <dirent.h>
 #include <iostream>
 #include <string>
-#include <thread>
 #include <vector>
 #include "frame.h"
 
