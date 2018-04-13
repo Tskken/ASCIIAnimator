@@ -65,7 +65,4 @@ void FrameFetcher::load_animation (std::string animation_path)
     closedir(dir);
     dir = NULL;
     ent = NULL;
-
-    std::thread worker(&FrameFetcher::load_frames, this);
-    worker.join();
 }
