@@ -8,6 +8,17 @@
 #include <streambuf>
 #include <thread>
 #include "framefetcher.h"
+#include <time.h>
+#include <stdlib.h>
+
+const std::string CL_RESET   = "\033[0m";
+const std::string BG_RED     = "\033[1;41m";
+const std::string BG_YELLOW  = "\033[1;43m";
+const std::string BG_GREEN   = "\033[1;42m";
+const std::string BG_CYAN    = "\033[1;46m";
+const std::string BG_BLUE    = "\033[1;44m";
+const std::string BG_MAGENTA = "\033[1;45m";
+const std::string FG_WHITE   = "\033[1;37m";
 
 class Animator
 {
@@ -15,6 +26,7 @@ class Animator
         std::ostream *m_out = &std::cout;
         FrameFetcher m_fetcher;
         int m_current_frame = -1;
+        std::string m_color = CL_RESET;
 
     public:
         Animator();
